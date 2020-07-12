@@ -1,6 +1,13 @@
 import express from 'express';
+import globalRouter from './routes/globalRouter';
+import userRouter from './routes/userRouter';
+import videoRouter from './routes/videoRouter';
+import routes from './routes';
 
 const app = express();
+app.use(routes.home, globalRouter);
+app.use(routes.user, userRouter);
+app.use(routes.video, videoRouter);
 
 app.listen(5000, () => {
   console.log(`server working @ http://localhost:5000`);
