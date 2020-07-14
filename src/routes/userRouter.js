@@ -4,6 +4,9 @@ import routes from '.';
 
 const userRouter = express.Router();
 
-userRouter.get(routes.home, userController.user);
+userRouter.get(routes.users, userController.users);
+userRouter.get(routes.userDetail, userController.userDetail);
+userRouter.get(routes.editProfile, userController.editProfile);
+userRouter.get(routes.changePassword, userController.changePassward);
 
 export default userRouter;
