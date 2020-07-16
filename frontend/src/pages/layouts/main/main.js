@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Header from './header';
+import Footer from './footer';
 
 const Main = ({ children }) => (
   <>
-    <header>
-      <h1>Youtube</h1>
-    </header>
+    <Header />
     <main>{children}</main>
-    <footer>
-      <span>&copy; Stella Jung</span>
-    </footer>
+    <Footer />
   </>
 );
 
