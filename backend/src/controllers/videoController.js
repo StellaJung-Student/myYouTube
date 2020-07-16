@@ -1,4 +1,10 @@
-export const home = (req, res) => res.send('Home');
+export const home = (req, res) =>
+  res.json({
+    status: 'success',
+    data: '',
+    error: '',
+    ...res.locals,
+  });
 export const search = (req, res) => res.send('Search');
 export const videos = (req, res) => res.send('Videos');
 export const upload = (req, res) => res.send('Upload');

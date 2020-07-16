@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './pages/home';
 import Main from './pages/layouts/main';
@@ -14,20 +14,34 @@ import EditProfile from './pages/editProfile';
 import Search from './pages/search';
 
 function App() {
+  const [routes, setRoutes] = useState({});
+  useEffect(() => {
+    fetch('http://localhost:5000')
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        setRoutes(res.routes);
+      });
+  }, []);
+  console.log(`${routes.users}${routes.userDetail}`);
   return (
     <Main>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/join" component={Join} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/logout" component={Logout} />
-        <Route exact path="/userdetail" component={UserDetail} />
-        <Route exact path="/upload" component={Upload} />
-        <Route exact path="/deletevideo" component={DeleteVideo} />
-        <Route exact path="/videodetail" component={VideoDetail} />
-        <Route exact path="/editvideo" component={EditVideo} />
-        <Route exact path="/editprofile" component={EditProfile} />
-        <Route exact path="/search" component={Search} />
+        <Route exact path={routes.home} component={Home} />
+        <Route exact path={routes.join} component={Join} />
+        <Route exact path={routes.login} component={Login} />
+        <Route exact path={routes.logout} component={Logout} />
+        <Route exact path="/users/:id" component={UserDetail} />
+        <Route exact path={routes.upload} component={Upload} />
+        <Route exact path={routes.deleteVideo} component={DeleteVideo} />
+        <Route exact path={routes.videoDetail} component={VideoDetail} />
+        <Route exact path={routes.editVideo} component={EditVideo} />
+        <Route exact path={routes.editProfile} component={EditProfile} />
+        <Route
+          exact
+          path={`${routes.videos}${routes.search}`}
+          component={Search}
+        />
       </Switch>
     </Main>
   );
