@@ -25,7 +25,7 @@ function App() {
   }, []);
   console.log(`${routes.users}${routes.userDetail}`);
   return (
-    <Main>
+    <Main routes={routes}>
       <Switch>
         <Route exact path={routes.home} component={Home} />
         <Route exact path={routes.join} component={Join} />

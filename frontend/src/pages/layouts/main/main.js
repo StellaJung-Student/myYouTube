@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import Header from './header';
 import Footer from './footer';
 
-const Main = ({ children }) => (
+const Main = ({ routes, children }) => (
   <>
-    <Header />
+    <Header routes={routes} />
     <main>{children}</main>
     <Footer />
   </>
 );
 
 Main.propTypes = {
+  routes: PropTypes.object.isRequired,
   children: PropTypes.object.isRequired,
 };
 
