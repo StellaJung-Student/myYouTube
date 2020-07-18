@@ -40,7 +40,7 @@ function App() {
         <Route
           exact
           path={`${routes.videos}${routes.search}`}
-          component={Search}
+          render={() => <Search routes={routes} />}
         />
       </Switch>
     </Main>
