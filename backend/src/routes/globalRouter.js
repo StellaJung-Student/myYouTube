@@ -8,7 +8,7 @@ const globalRouter = express.Router();
 globalRouter.get(routes.home, videoController.home);
 globalRouter.get(routes.search, videoController.search);
 globalRouter.post(routes.join, userController.postJoin);
-globalRouter.get(routes.login, userController.login);
+globalRouter.post(routes.login, userController.postlogin);
 globalRouter.get(routes.logout, userController.logout);
 
 export default globalRouter;
