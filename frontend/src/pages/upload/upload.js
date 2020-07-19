@@ -4,9 +4,9 @@ const Upload = () => (
   <div className="form_container">
     <form action={`/videos/upload`} method="post">
       <label htmlFor="file">Video File</label>
-      <input type="file" name="file" id="file" />
-      <input type="text" name="title" placeholder="Title" />
-      <textarea name="desc" placeholder="Description"></textarea>
+      <input type="file" name="file" id="file" required />
+      <input type="text" name="title" placeholder="Title" required />
+      <textarea name="desc" placeholder="Description" required></textarea>
       <button type="submit">Update Video</button>
     </form>
   </div>

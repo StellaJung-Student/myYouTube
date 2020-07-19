@@ -21,7 +21,24 @@ export const search = (req, res) => {
   });
 };
 export const videos = (req, res) => res.send('Videos');
-export const upload = (req, res) => res.send('Upload');
+export const postUpload = (req, res) => {
+  const {
+    body: { file, title, desc },
+  } = req;
+
+  console.log(file, title, desc);
+
+  const videoId = 324393;
+  res.json({
+    status: 'ok',
+    data: {
+      pageTitle: 'Video Detail',
+      videoId,
+    },
+    error: '',
+  });
+};
+
 export const videoDetail = (req, res) => res.send('Video Detail');
 export const editVideo = (req, res) => res.send('Edit Video');
 export const deleteVideo = (req, res) => res.send('Delete Video');
