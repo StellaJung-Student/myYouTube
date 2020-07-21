@@ -32,7 +32,11 @@ function App() {
         <Route exact path={routes.login} component={Login} />
         <Route exact path={routes.logout} component={Logout} />
         <Route exact path="/users/:id" component={UserDetail} />
-        <Route exact path={routes.upload} component={Upload} />
+        <Route
+          exact
+          path={`${routes.videos}${routes.upload}`}
+          component={Upload}
+        />
         <Route exact path={routes.deleteVideo} component={DeleteVideo} />
         <Route exact path={routes.videoDetail} component={VideoDetail} />
         <Route exact path={routes.editVideo} component={EditVideo} />
