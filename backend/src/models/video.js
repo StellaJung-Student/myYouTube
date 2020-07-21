@@ -1,50 +1,25 @@
-export const videos = [
+import mongoose, { Schema, mongo } from 'mongoose';
+
+const videoSchema = new Schema(
   {
-    id: 324393,
-    title: 'Video awesome',
-    description: 'This is something I love',
-    views: 24,
-    videoFile: 'https://archive.org/details/BigBuckBunny_124',
-    creator: {
-      id: 121212,
-      name: 'Nicolas',
-      email: 'nico@las.com',
+    fileUrl: {
+      type: String,
+      required: 'FIle URL is required',
     },
+    title: {
+      type: String,
+      required: 'Title is required',
+    },
+    views: {
+      type: Number,
+      default: 0,
+    },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   },
   {
-    id: 1212121,
-    title: 'Video super',
-    description: 'This is something I love',
-    views: 24,
-    videoFile: 'https://archive.org/details/BigBuckBunny_124',
-    creator: {
-      id: 121212,
-      name: 'Nicolas',
-      email: 'nico@las.com',
-    },
+    timestamps: true,
   },
-  {
-    id: 55555,
-    title: 'Video nice',
-    description: 'This is something I love',
-    views: 24,
-    videoFile: 'https://archive.org/details/BigBuckBunny_124',
-    creator: {
-      id: 121212,
-      name: 'Nicolas',
-      email: 'nico@las.com',
-    },
-  },
-  {
-    id: 11111,
-    title: 'Video perfect',
-    description: 'This is something I love',
-    views: 24,
-    videoFile: 'https://archive.org/details/BigBuckBunny_124',
-    creator: {
-      id: 121212,
-      name: 'Nicolas',
-      email: 'nico@las.com',
-    },
-  },
-];
+);
+
+const model = mongoose.model('Video', videoSchema);
+export default model;

@@ -6,6 +6,7 @@ import userRouter from './routes/userRouter';
 import videoRouter from './routes/videoRouter';
 import routes from './routes';
 import middlewares from './middlewares';
+import './models/mongodb';
 
 const app = express();
 const { PORT } = process.env;
