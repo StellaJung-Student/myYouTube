@@ -22,6 +22,8 @@ const Upload = () => {
         break;
       case 'desc':
         setDesc(value);
+        break;
+      default:
     }
   };
   return (

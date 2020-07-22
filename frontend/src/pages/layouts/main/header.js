@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Header = ({ routes, isAuthenticated = true }) => {
+const Header = ({ isAuthenticated = true }) => {
   return (
     <div className="header">
       <div className="header_column">
         <i className="fab fa-youtube"></i>
       </div>
       <div className="header_colum">
-        <form action={`${routes.videos}${routes.search}`} method="get">
+        <form>
           <input type="text" placeholder="Search by " name="term" />
         </form>
       </div>
@@ -18,19 +18,19 @@ const Header = ({ routes, isAuthenticated = true }) => {
           {isAuthenticated ? (
             <>
               <li>
-                <Link to={`${routes.videos}${routes.upload}`}>Upload</Link>
+                <Link to="/videos/upload">Upload</Link>
               </li>
               <li>
-                <Link to={routes.userDetail}>Profile</Link>
+                <Link to="/users/:id">Profile</Link>
               </li>
             </>
           ) : (
             <>
               <li>
-                <Link to={routes.join}>Join</Link>
+                <Link to="/join">Join</Link>
               </li>
               <li>
-                <Link to={routes.login}>Sign In</Link>
+                <Link to="/signIn">Sign In</Link>
               </li>
             </>
           )}
@@ -41,7 +41,6 @@ const Header = ({ routes, isAuthenticated = true }) => {
 };
 
 Header.propTypes = {
-  routes: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 export default Header;
