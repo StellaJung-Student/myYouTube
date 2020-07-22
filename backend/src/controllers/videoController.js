@@ -1,4 +1,5 @@
 import Video from '../models/video';
+import { returnNormalJson } from '../utils';
 
 export const home = async (req, res) => {
   const videos = await Video.find();
@@ -24,22 +25,24 @@ export const search = async (req, res) => {
   });
 };
 export const videos = (req, res) => res.send('Videos');
-export const postUpload = (req, res) => {
+export const postUpload = async (req, res) => {
   const {
-    body: { file, title, desc },
+    body: { title, desc },
+    file: { path },
   } = req;
 
-  console.log(file, title, desc);
-
-  const videoId = 324393;
-  res.json({
-    status: 'ok',
-    data: {
-      pageTitle: 'Video Detail',
-      videoId,
-    },
-    error: '',
+  console.log(path, title, desc);
+  const newVideo = await Video.create({
+    fileUrl: path,
+    title,
+    desc,
   });
+
+  const data = {
+    pageTitle: 'Video Detail',
+    videoId: newVideo._id,
+  };
+  returnNormalJson(res, data);
 };
 
 export const videoDetail = (req, res) => res.send('Video Detail');

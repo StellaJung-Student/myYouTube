@@ -1,21 +1,26 @@
 import React, { useState } from 'react';
 
 const Upload = () => {
-  const fileRef = useState(React.createRef());
+  const [file, setFile] = useState(null);
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
+
   const handleSubmit = e => {
     e.preventDefault();
-    console.log({
-      title,
-      desc,
-      file: fileRef.current.files,
+
+    const formData = new FormData();
+    formData.append('videoFile', file);
+    formData.append('title', title);
+    formData.append('desc', desc);
+    fetch('http://localhost:5000/videos/upload', {
+      method: 'post',
+      body: formData,
     });
   };
 
   const handleChange = e => {
     console.log(e.target.name, e.target.value);
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     switch (name) {
       case 'title':
         setTitle(value);
@@ -23,19 +28,23 @@ const Upload = () => {
       case 'desc':
         setDesc(value);
         break;
+      case 'file':
+        setFile(files[0]);
+        break;
       default:
     }
   };
   return (
     <div className="form_container">
-      <form action={`/videos/upload`} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="file">Video File</label>
         <input
           type="file"
           name="file"
           id="file"
-          ref={fileRef}
+          files={[file]}
           accept="video/*"
+          onChange={handleChange}
           required
         />
         <input
