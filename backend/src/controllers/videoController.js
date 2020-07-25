@@ -3,17 +3,22 @@ import { returnNormalJson } from '../utils';
 
 export const home = async (req, res) => {
   const videos = await Video.find();
-  res.json({
-    status: 'ok',
-    data: { videos },
-    error: '',
+  const data = {
+    videos,
     ...res.locals,
-  });
+  };
+  returnNormalJson(res, data, 200);
 };
 
 export const search = async (req, res) => {
   const searchBy = req.query.term;
   const videos = await Video.find({ title: searchBy });
+  const data = {
+    videos,
+    pageTitle: 'Search',
+    searchBy,
+  };
+  returnNormalJson(res, data, 200);
   res.json({
     status: 'ok',
     data: {
