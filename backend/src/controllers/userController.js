@@ -1,27 +1,36 @@
-export const postJoin = (req, res) => {
+import User from '../models/user';
+
+export const postJoin = async (req, res) => {
   const {
     body: { name, email, password, passwordCheck },
   } = req;
+  console.log(name, email);
   if (password !== passwordCheck) {
     res.status(400).json({
       status: 'error',
       data: {
         pageTitle: 'Sign Up',
       },
-      error: 'Bad Request',
+      error: 'Password not match',
     });
   } else {
-    res.json({
-      status: 'ok',
-      data: {
-        pageTitle: 'Sign up',
-        user: {
-          name,
-          email,
+    try {
+      const user = await User({
+        name,
+        email,
+      });
+      await User.register(user, password);
+      res.json({
+        status: 'ok',
+        data: {
+          pageTitle: 'Sign up',
+          user,
         },
-      },
-      error: '',
-    });
+        error: '',
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 
