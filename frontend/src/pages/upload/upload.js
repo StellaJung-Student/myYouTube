@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Upload = () => {
+  const history = useHistory();
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
@@ -15,7 +17,16 @@ const Upload = () => {
     fetch('http://localhost:5000/videos/upload', {
       method: 'post',
       body: formData,
-    });
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === 'ok') {
+          setFile(null);
+          setTitle('');
+          setDesc('');
+          history.push(`/videos/${res.data.videoId}`);
+        }
+      });
   };
 
   const handleChange = e => {
@@ -63,7 +74,7 @@ const Upload = () => {
         >
           {desc}
         </textarea>
-        <button type="submit">Update Video</button>
+        <input type="submit" value="Update Video" />
       </form>
     </div>
   );

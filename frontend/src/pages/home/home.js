@@ -3,7 +3,7 @@ import { videos } from './data';
 import Video from '../../components/video';
 
 const Home = () => (
-  <div className="videos">
+  <div className="home_videos">
     {videos.map(video => (
       <Video
         key={video.id}

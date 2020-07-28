@@ -1,0 +1,31 @@
+.form_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  form {
+    // width: 100%;
+    max-width: 500px;
+    // margin-bottom: 50px;
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px 0px 10px 10px; //top, right, bottom, left
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    input[type='submit'] {
+      background-color: $blue;
+      color: white;
+      font-weight: 550;
+      text-transform: uppercase;
+    }
+    textarea {
+      width: 100%;
+      resize: none;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border-color: white;
+    }
+  }
+}

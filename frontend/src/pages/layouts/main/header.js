@@ -15,7 +15,9 @@ const Header = ({ id = '123' }) => {
     <div className="header">
       <div className="header_wrapper">
         <div className="header_column">
-          <i className="fab fa-youtube"></i>
+          <Link to="/">
+            <i className="fab fa-youtube"></i>
+          </Link>
         </div>
         <div className="header_colum">
           <form>
@@ -39,7 +41,7 @@ const Header = ({ id = '123' }) => {
                   <Link to="/join">Join</Link>
                 </li>
                 <li>
-                  <Link to="/signIn">Sign In</Link>
+                  <Link to="/login">Sign In</Link>
                 </li>
               </>
             )}
