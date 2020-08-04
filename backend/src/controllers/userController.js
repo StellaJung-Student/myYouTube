@@ -1,4 +1,7 @@
 import User from '../models/user';
+import passport from 'passport';
+import { returnNormalJson, returnErrorJson } from '../utils';
+import routes from '../routes';
 
 export const postJoin = async (req, res) => {
   const {
@@ -6,13 +9,7 @@ export const postJoin = async (req, res) => {
   } = req;
   console.log(name, email);
   if (password !== passwordCheck) {
-    res.status(400).json({
-      status: 'error',
-      data: {
-        pageTitle: 'Sign Up',
-      },
-      error: 'Password not match',
-    });
+    returnErrorJson(res, { error: 'Password not matched' }, 400);
   } else {
     try {
       const user = await User({
@@ -20,44 +17,51 @@ export const postJoin = async (req, res) => {
         email,
       });
       await User.register(user, password);
-      res.json({
-        status: 'ok',
-        data: {
-          pageTitle: 'Sign up',
-          user,
-        },
-        error: '',
-      });
+      const token = user.getToken();
+      console.log('tet:', user.token, user);
+      returnNormalJson(res, { user: { name, email, token } }, 200);
     } catch (error) {
       console.log(error);
     }
   }
 };
 
-export const postlogin = (req, res) => {
-  const {
-    body: { email, password },
-  } = req;
-  if (email === 'test@test.com' && password === 'test') {
-    res.json({
-      status: 'ok',
-      data: {
-        pageTitle: 'Sign In',
-      },
-      error: '',
-    });
+export const afterlogin = (req, res) => {
+  const { user } = req;
+  const { name, email } = user;
+  console.log('afterlogin from user data:', name, email, user);
+  if (user) {
+    // const token = user.getToken();
+    // console.log('afterLogin-token:', token);
+    returnNormalJson(res, { user: { name, email } }, 200);
   } else {
-    res.status(400);
-    res.json({
-      status: 'error',
-      data: {
-        pageTitle: 'Sign In',
-      },
-      error: 'Bad Request',
-    });
+    returnErrorJson(res, { message: 'no user found' }, 400);
   }
 };
+export const redirectSuccess = (req, res) => {
+  returnNormalJson(res, 'success', 200);
+};
+
 export const logout = (req, res) => res.send('Logout');
+
+export const check = (req, res) => {
+  let data;
+
+  if (res.locals.isAuthenticated) {
+    data = {
+      name: req.user.name,
+      email: req.user.email,
+      isAuthenticated: res.locals.isAuthenticated,
+    };
+    returnNormalJson(res, data, 200);
+  } else {
+    data = {
+      message: 'Not authorized',
+      isAuthenticated: res.locals.isAuthenticated,
+    };
+    returnErrorJson(res, data, 401);
+  }
+};
 export const users = (req, res) => res.send('Users');
 export const userDetail = (req, res) => res.send('User Detail');
 export const editProfile = (req, res) => res.send('Edit Profile');

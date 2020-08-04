@@ -1,9 +1,11 @@
 // Global
 const HOME = '/';
+const CHECK = '/check';
 const JOIN = '/join';
 const LOGIN = '/login';
 const LOGOUT = '/logout';
 const SEARCH = '/search';
+const REDIRECT_SUCCESS = '/redirectSuccess';
 
 // Users
 
@@ -22,10 +24,12 @@ const DELETE_VIDEO = '/:id/delete';
 
 const routes = {
   home: HOME,
+  check: CHECK,
   join: JOIN,
   login: LOGIN,
   logout: LOGOUT,
   search: SEARCH,
+  redirectSuccess: REDIRECT_SUCCESS,
   users: USERS,
   userDetail: id => {
     if (id) {
