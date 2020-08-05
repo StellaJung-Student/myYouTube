@@ -9,8 +9,19 @@ const globalRouter = express.Router();
 globalRouter.get(routes.check, userController.check);
 globalRouter.get(routes.home, videoController.home);
 globalRouter.get(routes.search, videoController.search);
-globalRouter.post(routes.join, userController.postJoin);
-globalRouter.post(routes.login, passportAuth, userController.afterlogin);
+globalRouter.post(
+  routes.join,
+  userController.postJoin,
+  passportAuth,
+  userController.afterlogin,
+  userController.check,
+);
+globalRouter.post(
+  routes.login,
+  passportAuth,
+  userController.afterlogin,
+  userController.check,
+);
 globalRouter.get(routes.logout, userController.logout);
 globalRouter.get(routes.redirectSuccess, userController.redirectSuccess);
 

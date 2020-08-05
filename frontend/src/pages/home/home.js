@@ -1,8 +1,9 @@
 import React from 'react';
-import { videos } from './data';
+// import { videos } from './data';
+import PropTypes from 'prop-types';
 import Video from '../../components/video';
 
-const Home = () => (
+const Home = ({ videos = [] }) => (
   <div className="home_videos">
     {videos.map(video => (
       <Video
@@ -16,4 +17,7 @@ const Home = () => (
   </div>
 );
 
+Home.propTypes = {
+  videos: PropTypes.array,
+};
 export default Home;

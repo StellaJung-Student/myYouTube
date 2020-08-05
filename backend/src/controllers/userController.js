@@ -1,9 +1,7 @@
 import User from '../models/user';
-import passport from 'passport';
 import { returnNormalJson, returnErrorJson } from '../utils';
-import routes from '../routes';
 
-export const postJoin = async (req, res) => {
+export const postJoin = async (req, res, next) => {
   const {
     body: { name, email, password, passwordCheck },
   } = req;
@@ -17,23 +15,25 @@ export const postJoin = async (req, res) => {
         email,
       });
       await User.register(user, password);
-      const token = user.getToken();
+
       console.log('tet:', user.token, user);
-      returnNormalJson(res, { user: { name, email, token } }, 200);
+      // returnNormalJson(res, { user: { name, email } }, 200);
+      next();
     } catch (error) {
       console.log(error);
     }
   }
 };
 
-export const afterlogin = (req, res) => {
+export const afterlogin = (req, res, next) => {
   const { user } = req;
   const { name, email } = user;
   console.log('afterlogin from user data:', name, email, user);
   if (user) {
     // const token = user.getToken();
     // console.log('afterLogin-token:', token);
-    returnNormalJson(res, { user: { name, email } }, 200);
+    // returnNormalJson(res, { user: { name, email } }, 200);
+    next();
   } else {
     returnErrorJson(res, { message: 'no user found' }, 400);
   }
@@ -47,17 +47,17 @@ export const logout = (req, res) => res.send('Logout');
 export const check = (req, res) => {
   let data;
 
-  if (res.locals.isAuthenticated) {
+  if (req.user) {
     data = {
       name: req.user.name,
       email: req.user.email,
-      isAuthenticated: res.locals.isAuthenticated,
+      isAuthenticated: Boolean(req.user),
     };
     returnNormalJson(res, data, 200);
   } else {
     data = {
       message: 'Not authorized',
-      isAuthenticated: res.locals.isAuthenticated,
+      isAuthenticated: Boolean(req.user),
     };
     returnErrorJson(res, data, 401);
   }

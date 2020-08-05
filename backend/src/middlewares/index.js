@@ -31,7 +31,7 @@ export default app => {
       cookie: { maxAge: 60 * 1000 * 10 },
     }),
   );
-  app.use(cors());
+  app.use(cors({ origin: process.env.CLIENT, credentials: true }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(localsMiddleware);
