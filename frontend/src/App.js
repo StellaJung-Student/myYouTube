@@ -18,7 +18,11 @@ function App() {
   const privateRouter = () => (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/logout" component={Logout} />
+      <Route
+        exact
+        path="/logout"
+        render={props => <Logout {...props} setAuth={setAuth} />}
+      />
       <Route exact path="/users/:id" component={UserDetail} />
       <Route exact path="/videos/upload" component={Upload} />
       <Route exact path="/videos/deleteVideo" component={DeleteVideo} />

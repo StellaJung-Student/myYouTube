@@ -42,7 +42,10 @@ export const redirectSuccess = (req, res) => {
   returnNormalJson(res, 'success', 200);
 };
 
-export const logout = (req, res) => res.send('Logout');
+export const logout = (req, res) => {
+  req.logout();
+  returnNormalJson(res, 'logout successfully');
+};
 
 export const check = (req, res) => {
   let data;
