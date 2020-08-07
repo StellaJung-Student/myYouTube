@@ -16,7 +16,8 @@ const app = express();
 middlewares(app);
 
 // routing
-app.use(express.static(`${__dirname}/uploads/videos`));
+console.log(path.join(__dirname, '../uploads/videos'));
+app.use('/public', express.static(path.join(__dirname, '../uploads/videos')));
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);

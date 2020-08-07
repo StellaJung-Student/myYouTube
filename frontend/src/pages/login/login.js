@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SocialLogin from '../socialLogin/socialLogin';
-import { useHistory } from 'react-router-dom';
 
 const Login = ({ setAuth }) => {
-  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -42,9 +40,6 @@ const Login = ({ setAuth }) => {
         console.log('from backend data:', res);
         if (res.status === 'ok') {
           setAuth(res.data.isAuthenticated);
-          setEmail('');
-          setPassword('');
-          history.push('/');
         }
       });
   };
