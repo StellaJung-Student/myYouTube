@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Header = ({ isAuth, id = '123' }) => {
+  console.log('header-isauth:', isAuth);
   return (
     <div className="header">
       <div className="header_wrapper">
