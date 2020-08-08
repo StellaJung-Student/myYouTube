@@ -70,10 +70,9 @@ const Upload = () => {
           name="desc"
           placeholder="Description"
           onChange={handleChange}
+          value={desc}
           required
-        >
-          {desc}
-        </textarea>
+        ></textarea>
         <input type="submit" value="Update Video" />
       </form>
     </div>

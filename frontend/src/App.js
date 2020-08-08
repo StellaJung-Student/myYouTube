@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './pages/home';
 import Main from './pages/layouts/main';
@@ -14,6 +14,17 @@ import Search from './pages/search';
 
 function App() {
   const [isAuth, setAuth] = useState(false);
+  useEffect(() => {
+    fetch('http://localhost:5000/check', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === 'ok') {
+          setAuth(res.data.isAuthenticated);
+        }
+      });
+  }, []);
 
   const privateRouter = () => (
     <Switch>
