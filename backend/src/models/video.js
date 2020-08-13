@@ -10,6 +10,9 @@ const videoSchema = new Schema(
       type: String,
       required: 'Title is required',
     },
+
+    desc: String,
+
     views: {
       type: Number,
       default: 0,

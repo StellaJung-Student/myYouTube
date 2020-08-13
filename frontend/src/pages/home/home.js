@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Video from '../../components/video';
+import VideoDesc from '../../components/videoDesc';
 
 const Home = () => {
   const [videos, setVideos] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:5000')
+    fetch('http://localhost:5000', { credentials: 'include' })
       .then(res => res.json())
       .then(res => {
         console.log(res.data.videos);
@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <div className="home_videos">
       {videos.map(video => (
-        <Video
+        <VideoDesc
           key={video._id}
           id={video._id}
           videoFile={video.fileURL}

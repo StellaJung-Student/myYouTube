@@ -13,6 +13,9 @@
       i {
         color: white;
         font-size: 40px;
+        &:hover {
+          color: $hover;
+        }
       }
     }
     form {
@@ -36,9 +39,10 @@
       }
       li {
         a {
-          &:visited {
-            color: white;
+          &:hover {
+            color: $hover;
           }
+          color: white;
         }
       }
     }
